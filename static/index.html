@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Polskie Wordle</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="game">
+    <header>
+      <h1>Polskie Wordle</h1>
+      <p>Odgadnij pięcioliterowe słowo w sześciu próbach.</p>
+    </header>
+
+    <section id="board" class="board" aria-label="Plansza gry"></section>
+
+    <form id="guess-form" class="guess-form">
+      <label for="guess">Twoja próba</label>
+      <div class="form-row">
+        <input id="guess" name="guess" type="text" maxlength="5" minlength="5" autocomplete="off" required>
+        <button type="submit">Sprawdź</button>
+      </div>
+    </form>
+
+    <p id="message" class="message" role="status"></p>
+    <button id="new-game" class="secondary" type="button">Nowa gra</button>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
