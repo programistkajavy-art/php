@@ -1,6 +1,4 @@
-import json
-
-from app.game import evaluate_guess
+from game.game_logic import evaluate_guess
 
 
 def test_evaluate_guess_handles_all_statuses():

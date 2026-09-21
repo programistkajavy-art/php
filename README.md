@@ -8,7 +8,7 @@ Zainstaluj zależności i uruchom:
 
 ```powershell
 pip install -r requirements.txt
-uvicorn app.main:app --reload
+python manage.py runserver
 ```
 
 API jest dostępne pod `http://127.0.0.1:8000`.
