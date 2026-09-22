@@ -4,8 +4,11 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from uuid import uuid4
 
+from django.db import OperationalError
+
+from .models import Word
+
 MAX_ATTEMPTS = 6
-SAMPLE_WORDS = ["domek", "lampa", "morze", "rzeka", "sanki", "szafa", "trawa"]
 GAMES: dict[str, "Game"] = {}
 
 
@@ -62,7 +65,14 @@ def evaluate_guess(guess: str, target: str) -> list[str]:
 
 
 def create_game() -> Game:
-	game = Game(target_word=SAMPLE_WORDS[0])
+	try:
+		words = list(Word.objects.filter(is_active=True).values_list("word", flat=True))
+	except OperationalError as error:
+		raise GameError("Nie można odczytać słów z bazy danych", 503) from error
+	if not words:
+		raise GameError("Brak aktywnych słów w bazie danych", 503)
+
+	game = Game(target_word=words[0])
 	GAMES[game.id] = game
 	return game
 

@@ -1,2 +1,5 @@
 Django
+python-dotenv
+mssql-django
+pyodbc
 pytest

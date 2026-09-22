@@ -17,7 +17,11 @@ def home(request):
 def start_game(request):
     if request.method != "POST":
         return JsonResponse({"detail": "Method not allowed"}, status=405)
-    return JsonResponse(game_response(create_game()), status=201)
+    try:
+        game = create_game()
+    except GameError as error:
+        return JsonResponse({"detail": error.detail}, status=error.status_code)
+    return JsonResponse(game_response(game), status=201)
 
 
 @csrf_exempt
